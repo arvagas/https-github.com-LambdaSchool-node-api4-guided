@@ -18,16 +18,8 @@ module.exports = {
     },
   },
   production: {
-    client: 'sqlite3',
-    useNullAsDefault: true,
-    connection: {
-      filename: './data/shouts.db3',
-    },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-      },
-    },
+    client: 'pg',
+    connection: process.env.DATABASE_URL, // will be set by heroku in production
     migrations: {
       directory: './data/migrations',
     },
